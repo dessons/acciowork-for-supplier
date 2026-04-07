@@ -1,1 +1,30 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Accio Work for Supplier</title></head><body><div id="root"></div><script defer="defer" src="/acciowork-for-supplier/bundle.js?v=6"></script></body></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Accio Work for Supplier</title><style>/* Loading screen - shown immediately, hidden when React loads */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #fff;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 0.4s ease;
+    }
+    #loader.hide { opacity: 0; pointer-events: none; }
+    .loader-spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #e5e7eb;
+      border-top-color: #10b981;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loader-text { margin-top: 16px; color: #6e6e73; font-size: 14px; font-family: -apple-system, sans-serif; }</style></head><body><div id="loader"><div class="loader-spinner"></div><div class="loader-text">加载中...</div></div><div id="root"></div><script>// Hide loader when page is ready
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var l = document.getElementById('loader');
+        if (l) l.classList.add('hide');
+        setTimeout(function() { if (l) l.remove(); }, 500);
+      }, 200);
+    });
+    // Fallback: hide after 5 seconds no matter what
+    setTimeout(function() {
+      var l = document.getElementById('loader');
+      if (l) l.classList.add('hide');
+    }, 5000);</script><script defer="defer" src="/acciowork-for-supplier/bundle.js?v=7"></script><script defer="defer" src="/acciowork-for-supplier/bundle.js?v=7"></script></body></html>
