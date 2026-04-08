@@ -330,7 +330,7 @@
             </div>
           </div>
           <div class="video-demo">
-            <video controls muted preload="none" class="w-full h-auto">
+            <video id="demoVideo1" controls muted preload="metadata" class="w-full h-auto">
               <source src="https://cloud.video.taobao.com/vod/W5fYi-rqQYIlh-HHZELF0f5CRDKfv6fNWYQ2msuyK3I.mp4" type="video/mp4" />
             </video>
           </div>
@@ -360,7 +360,7 @@
             </div>
           </div>
           <div class="video-demo">
-            <video controls muted preload="none" class="w-full h-auto">
+            <video id="demoVideo2" controls muted preload="metadata" class="w-full h-auto">
               <source src="https://cloud.video.taobao.com/vod/Nxb4aWRQCl1lwWRbMMBzD3viEThOhg4LRe9iSat78OI.mp4" type="video/mp4" />
             </video>
           </div>
@@ -390,7 +390,7 @@
             </div>
           </div>
           <div class="video-demo">
-            <video controls muted preload="none" class="w-full h-auto">
+            <video id="demoVideo3" controls muted preload="metadata" class="w-full h-auto">
               <source src="https://cloud.video.taobao.com/vod/YVOHY9avayT7kuXNayw_BWNN8LAo47kspjxU47_crQE.mp4" type="video/mp4" />
             </video>
           </div>
@@ -420,7 +420,7 @@
             </div>
           </div>
           <div class="video-demo">
-            <video controls muted preload="none" class="w-full h-auto">
+            <video id="demoVideo4" controls muted preload="metadata" class="w-full h-auto">
               <source src="https://cloud.video.taobao.com/vod/8NN260CyDXm0nRIfE4C8CwdhpgIRG0qlOs7jmuzrbw4.mp4" type="video/mp4" />
             </video>
           </div>
@@ -481,6 +481,10 @@
   }
   setupVideoAutoplay(document.getElementById('heroVideo'));
   setupVideoAutoplay(document.getElementById('installVideo'));
+  setupVideoAutoplay(document.getElementById('demoVideo1'));
+  setupVideoAutoplay(document.getElementById('demoVideo2'));
+  setupVideoAutoplay(document.getElementById('demoVideo3'));
+  setupVideoAutoplay(document.getElementById('demoVideo4'));
 </script>
 
 </body>
