@@ -447,7 +447,7 @@
     <div class="max-w-3xl mx-auto mb-10 sm:mb-16">
       <div class="video-wrap">
         <video id="installVideo" controls class="w-full h-auto">
-          <source src="https://tbexpand.alicdn.com/avpl/publish/copy/019d-528bb7fd-a1b22a10-9bc0bb0d-0d6c/294b742b97fd7ad6.mp4?auth_key=1775566385-0-0-5ec4e2b3e723d3abc2c1c1b039331b2e&biz=publish-7035dd1f77cba38a&t=213e045a17755636859192403e0f4d&t=213e045a17755636859192403e0f4d&b=publish&p=cloudvideo_http_video_extranet_notrans&i=559255162328" type="video/mp4" />
+          <source src="https://tbexpand.alicdn.com/avpl/publish/copy/019d-528bb7fd-a1b22a10-9bc0bb0d-0d6c/294b742b97fd7ad6.mp4?auth_key=1775619120-0-0-06c5e258b78316a4be907f7a4eed65c9&biz=publish-fbf36462d9756bd5&t=213e035217756164209608131e0d72&t=213e035217756164209608131e0d72&b=publish&p=cloudvideo_http_video_extranet_notrans&i=559255162328" type="video/mp4" />
           您的浏览器不支持视频播放
         </video>
       </div>
@@ -471,13 +471,12 @@
 <script>
   function setupVideoAutoplay(videoEl) {
     if (!videoEl) return;
+    // Start muted for autoplay compatibility
+    videoEl.muted = true;
     const observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           videoEl.play().catch(function() {});
-          videoEl.muted = false;
-          videoEl.autoplay = false;
-          videoEl.loop = false;
         } else {
           videoEl.pause();
         }
