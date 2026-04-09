@@ -75,7 +75,7 @@
       </div>
       <div class="max-w-6xl mx-auto">
         <div class="video-wrap">
-          <video id="heroVideo" controls class="w-full h-auto" poster="https://oneday-react-native.oss-cn-zhangjiakou.aliyuncs.com/oneday/source/c9b9d13a-6850-477d-ae6b-035484ec4fb6.png" preload="none">
+          <video id="heroVideo" controls class="w-full h-auto" poster="https://oneday-react-native.oss-cn-zhangjiakou.aliyuncs.com/oneday/source/c9b9d13a-6850-477d-ae6b-035484ec4fb6.png" preload="metadata" playsinline>
             <source src="https://cloud.video.taobao.com/vod/ycKhnF1IUkX5UyLZVS4HzwF3Y_P6DlVW5LaUyyAsOw8.mp4" type="video/mp4" />
           </video>
         </div>
@@ -347,7 +347,7 @@
             </div>
           </div>
           <div class="video-demo">
-            <video id="demoVideo1" controls muted preload="none" class="w-full h-auto">
+            <video id="demoVideo1" controls muted preload="none" playsinline class="w-full h-auto">
               <source src="https://cloud.video.taobao.com/vod/W5fYi-rqQYIlh-HHZELF0f5CRDKfv6fNWYQ2msuyK3I.mp4" type="video/mp4" />
             </video>
           </div>
@@ -377,7 +377,7 @@
             </div>
           </div>
           <div class="video-demo">
-            <video id="demoVideo2" controls muted preload="none" class="w-full h-auto">
+            <video id="demoVideo2" controls muted preload="none" playsinline class="w-full h-auto">
               <source src="https://cloud.video.taobao.com/vod/Nxb4aWRQCl1lwWRbMMBzD3viEThOhg4LRe9iSat78OI.mp4" type="video/mp4" />
             </video>
           </div>
@@ -407,7 +407,7 @@
             </div>
           </div>
           <div class="video-demo">
-            <video id="demoVideo3" controls muted preload="none" class="w-full h-auto">
+            <video id="demoVideo3" controls muted preload="none" playsinline class="w-full h-auto">
               <source src="https://cloud.video.taobao.com/vod/YVOHY9avayT7kuXNayw_BWNN8LAo47kspjxU47_crQE.mp4" type="video/mp4" />
             </video>
           </div>
@@ -437,7 +437,7 @@
             </div>
           </div>
           <div class="video-demo">
-            <video id="demoVideo4" controls muted preload="none" class="w-full h-auto">
+            <video id="demoVideo4" controls muted preload="none" playsinline class="w-full h-auto">
               <source src="https://cloud.video.taobao.com/vod/8NN260CyDXm0nRIfE4C8CwdhpgIRG0qlOs7jmuzrbw4.mp4" type="video/mp4" />
             </video>
           </div>
@@ -488,6 +488,11 @@
     const observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          // Handle preload="none" videos: load metadata first
+          if (videoEl.preload === 'none') {
+            videoEl.preload = 'metadata';
+            videoEl.load();
+          }
           videoEl.play().catch(function() {});
         } else {
           videoEl.pause();
