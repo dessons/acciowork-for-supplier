@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Accio Work for Supplier</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .hero-gradient { background: linear-gradient(to bottom, #fff, rgba(16,185,129,0.03), #fff); }
+    .emerald-gradient { background: linear-gradient(to right, #10b981, #14b8a6); }
+    .text-gradient { background: linear-gradient(to right, #059669, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .video-wrap { position: relative; padding-top: 56.25%; overflow: hidden; border-radius: 1rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); background: #f1f5f9; }
+    .video-wrap video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .video-demo { position: relative; padding-top: 56.25%; overflow: hidden; border-radius: 1rem; box-shadow: 0 8px 30px rgba(0,0,0,0.06); background: #f1f5f9; }
+    .video-demo video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    /* Loading */
+    #loader { position: fixed; inset: 0; z-index: 9999; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.4s ease; }
+    #loader.hide { opacity: 0; pointer-events: none; }
+    .loader-spinner { width: 36px; height: 36px; border: 3px solid #e5e7eb; border-top-color: #10b981; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loader-text { margin-top: 16px; color: #6e6e73; font-size: 14px; }
+  
+    .img-glow { box-shadow: 0 20px 60px -15px rgba(16,185,129,0.25), 0 8px 30px -10px rgba(0,0,0,0.08); }
+    .bullet-list { list-style: none; padding: 0; }
+    .bullet-list li { position: relative; padding-left: 1.5rem; margin-bottom: 1rem; font-size: 1.1rem; color: #334155; line-height: 1.6; }
+    .bullet-list li::before { content: ''; position: absolute; left: 0; top: 0.55rem; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #10b981; }
+
+
+    .img-glow { box-shadow: 0 20px 60px -15px rgba(16,185,129,0.25), 0 8px 30px -10px rgba(0,0,0,0.08); }
+    .bullet-list { list-style: none; padding: 0; }
+    .bullet-list li { position: relative; padding-left: 1.5rem; margin-bottom: 1rem; font-size: 1.1rem; color: #334155; line-height: 1.6; }
+    .bullet-list li::before { content: ''; position: absolute; left: 0; top: 0.55rem; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #10b981; }
+
+</style>
+</head>
+<body class="min-h-screen bg-white">
+
+<!-- Loading -->
+<div id="loader"><div class="loader-spinner"></div><div class="loader-text">加载中...</div></div>
+<script>
+  window.addEventListener('load', function() {
+    setTimeout(function() { var l = document.getElementById('loader'); if (l) l.classList.add('hide'); setTimeout(function() { if (l) l.remove(); }, 500); }, 200);
+  });
+  setTimeout(function() { var l = document.getElementById('loader'); if (l) l.classList.add('hide'); }, 3000);
+</script>
+
+<div class="page">
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="relative overflow-hidden min-h-[70vh] md:min-h-screen flex flex-col hero-gradient">
+  <div class="relative flex-1 flex items-center justify-center pt-12 sm:pt-16 md:pt-32 pb-6">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div class="text-center space-y-4 md:space-y-8 mb-6 md:mb-12">
+        <div class="flex flex-col items-center gap-2 md:gap-4">
+          <div class="inline-flex items-center px-4 py-1.5 emerald-gradient text-white text-sm font-semibold rounded-full shadow-lg">
+            全新推出
+          </div>
+          <img
+            src="https://img.alicdn.com/imgextra/i4/O1CN01ABCxq51ToXAz6c9XL_!!6000000002429-54-tps-1654-356.apng"
+            alt="Accio Work"
+            class="w-48 sm:w-64 md:w-80 lg:w-[580px] h-auto"
+          />
+        </div>
+        <h2 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 tracking-tight leading-tight">
+          <span class="text-emerald-600">跨境生意</span>工作台
+        </h2>
+        <p class="text-sm sm:text-lg md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-light">
+          一个能自主帮中小企业做全球生意的 Agent 团队
+        </p>
+      </div>
+      <div class="max-w-6xl mx-auto">
+        <div class="video-wrap">
+          <video id="heroVideo" controls class="w-full h-auto" poster="https://oneday-react-native.oss-cn-zhangjiakou.aliyuncs.com/oneday/source/c9b9d13a-6850-477d-ae6b-035484ec4fb6.png">
+            <source src="https://cloud.video.taobao.com/vod/ycKhnF1IUkX5UyLZVS4HzwF3Y_P6DlVW5LaUyyAsOw8.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="h-px mx-auto max-w-md bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+
+<!-- ═══════════ 三大特点 ═══════════ -->
+<!-- Floor 1: 极度简单 — white -->
+<section class="py-10 sm:py-14 md:py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 sm:mb-10 md:mb-16 text-slate-900 tracking-tight">三大特点</h2>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-center">
+      <div class="space-y-6">
+        <div class="inline-block px-4 py-1 bg-emerald-100 rounded-full text-sm font-medium text-emerald-700">极度简单</div>
+        <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">0门槛上手</h3>
+        <div class="space-y-4 text-base sm:text-lg text-slate-700 leading-relaxed">
+          <div class="flex items-start gap-3"><div class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-2.5 flex-shrink-0"></div><p>accio.com/work 下载即用，无需培训</p></div>
+          <div class="flex items-start gap-3"><div class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-2.5 flex-shrink-0"></div><p>大白话发指令，Agent 自动调用顶尖模型</p></div>
+          <div class="flex items-start gap-3"><div class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-2.5 flex-shrink-0"></div><p>可拉起 Agent 团队完成复杂任务</p></div>
+          <div class="flex items-start gap-3"><div class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-2.5 flex-shrink-0"></div><p>帮你做全球生意，即开即用</p></div>
+        </div>
+      </div>
+      <div>
+        <img src="https://oneday-react-native.oss-cn-zhangjiakou.aliyuncs.com/oneday/source/c9b9d13a-6850-477d-ae6b-035484ec4fb6.png" alt="产品界面" class="w-full h-auto" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Floor 2: 专业性强 — white bg, image left with green glow -->
+<section class="py-10 sm:py-14 md:py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+      <!-- Image: skill marketplace -->
+      <div class="md:order-first">
+        <img src="技能广场.png" alt="技能广场" class="w-full h-auto" loading="lazy" />
+      </div>
+      <!-- Text content -->
+      <div class="space-y-6 md:pl-8">
+        <div class="inline-block px-5 py-1.5 bg-emerald-100 rounded-full text-sm font-semibold text-emerald-700">专业性强</div>
+        <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight">能赚钱的 Agent</h3>
+        <ul class="bullet-list">
+          <li>专为跨境场景调优，擅长生意经营</li>
+          <li>市场调研、选品、营销、客服全覆盖</li>
+          <li>直连阿里国际站，顺畅调用专业工具</li>
+          <li>不只办公，帮你对外拓展赚钱</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Floor 3: 安全可靠 — white -->
+<section class="py-10 sm:py-14 md:py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-center">
+      <div class="space-y-6">
+        <div class="inline-block px-4 py-1 bg-cyan-100 rounded-full text-sm font-medium text-cyan-700">安全可靠</div>
+        <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">企业级数据安全</h3>
+        <div class="space-y-4 text-base sm:text-lg text-slate-700 leading-relaxed">
+          <div class="flex items-start gap-3"><div class="w-2.5 h-2.5 rounded-full bg-cyan-500 mt-2.5 flex-shrink-0"></div><p>企业级数据安全标准，数据保留本地端</p></div>
+          <div class="flex items-start gap-3"><div class="w-2.5 h-2.5 rounded-full bg-cyan-500 mt-2.5 flex-shrink-0"></div><p>国内合规，放心使用</p></div>
+        </div>
+      </div>
+      <div>
+        <img src="https://oneday-react-native.oss-cn-zhangjiakou.aliyuncs.com/oneday/source/02b436ac-f6e4-4570-be40-11a4b74f1433.jpg" alt="数据安全" class="w-full h-auto" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="h-px mx-auto max-w-md bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+
+<!-- ═══════════ 对商家有什么好处 ═══════════ -->
+<section class="relative py-10 sm:py-12 md:py-24 overflow-hidden bg-slate-50">
+  
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <div class="text-center mb-8 sm:mb-12 md:mb-20">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 sm:mb-8 tracking-tight px-4">对商家有什么好处?</h2>
+      <p class="text-lg sm:text-xl md:text-2xl text-slate-600 font-light px-4">让 AI 接管繁琐工作,专注核心业务增长</p>
+    </div>
+
+    <div class="space-y-16 md:space-y-20">
+      <!-- 好处一：电商运营全自动 -->
+      <div>
+        <div class="text-center mb-6 sm:mb-10">
+          <div class="inline-flex items-center px-4 py-2 emerald-gradient text-white text-sm font-semibold rounded-full shadow-lg mb-3 md:mb-4">好处一</div>
+          <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2 md:mb-3">电商运营全自动</h3>
+          <p class="text-base sm:text-lg font-semibold text-gradient">接入国际站发挥最强能力</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <!-- 已开国际站商家 -->
+          <div class="relative group">
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+            <div class="relative bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-3xl p-6 sm:p-8 border-2 border-emerald-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 hover:border-emerald-300">
+              <div class="flex items-center gap-3 mb-5 sm:mb-6">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full emerald-gradient flex items-center justify-center shadow-md">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <h4 class="text-xl sm:text-2xl font-bold text-slate-900">已开国际站商家</h4>
+              </div>
+              <p class="text-slate-700 mb-6 sm:mb-8 text-sm sm:text-base font-medium">与国际站深度融合，更聪明 + 更省力</p>
+              <div class="space-y-3 sm:space-y-4">
+                <div class="flex items-start gap-3"><div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-emerald-600 font-bold text-sm sm:text-base">0</span></div><div><p class="font-semibold text-slate-900 mb-1 text-sm sm:text-base">零学习成本</p><p class="text-xs sm:text-sm text-slate-600">无需精通规则，只需下命令</p></div></div>
+                <div class="flex items-start gap-3"><div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-teal-600 font-bold text-sm sm:text-base">24</span></div><div><p class="font-semibold text-slate-900 mb-1 text-sm sm:text-base">全天候运转</p><p class="text-xs sm:text-sm text-slate-600">7×24 小时不间断工作</p></div></div>
+                <div class="flex items-start gap-3"><div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><p class="font-semibold text-slate-900 mb-1 text-sm sm:text-base">聚焦战略</p><p class="text-xs sm:text-sm text-slate-600">从盯操作到抓方向</p></div></div>
+                <div class="flex items-start gap-3"><div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg></div><div><p class="font-semibold text-slate-900 mb-1 text-sm sm:text-base">一屏掌控</p><p class="text-xs sm:text-sm text-slate-600">告别多后台切换</p></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 未开国际站商家 -->
+          <div class="relative group">
+            <div class="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-cyan-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+            <div class="relative bg-gradient-to-br from-teal-50 to-cyan-100/50 rounded-3xl p-6 sm:p-8 border-2 border-teal-300 shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 hover:border-teal-300">
+              <div class="flex items-center gap-3 mb-5 sm:mb-6">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-md">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                </div>
+                <h4 class="text-xl sm:text-2xl font-bold text-slate-900">未开国际站商家</h4>
+              </div>
+              <p class="text-slate-700 mb-6 sm:mb-8 text-sm sm:text-base font-medium">多平台生意一起做，接入国际站更专业</p>
+              <div class="space-y-3 sm:space-y-4">
+                <div class="flex items-start gap-3"><div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 sm:w-5 sm:h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg></div><div><p class="font-semibold text-slate-900 mb-1 text-sm sm:text-base">一个工作台</p><p class="text-xs sm:text-sm text-slate-600">可操作多电商后台，无需切换</p></div></div>
+                <div class="flex items-start gap-3"><div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><p class="font-semibold text-slate-900 mb-1 text-sm sm:text-base">30分钟建站</p><p class="text-xs sm:text-sm text-slate-600">自动建起装修精美、功能齐全的网店</p></div></div>
+                <div class="flex items-start gap-3"><div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 sm:w-5 sm:h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg></div><div><p class="font-semibold text-slate-900 mb-1 text-sm sm:text-base">自主推广投流</p><p class="text-xs sm:text-sm text-slate-600">在海外各大平台发帖推广、营销投流</p></div></div>
+                <div class="flex items-start gap-3"><div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div><div><p class="font-semibold text-slate-900 mb-1 text-sm sm:text-base">完整自动电商工作流</p><p class="text-xs sm:text-sm text-slate-600">通用能力覆盖日常，接入国际站更专业</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 好处二：海外流量双入口 -->
+      <div>
+        <div class="text-center mb-6 sm:mb-10">
+          <div class="inline-flex items-center px-4 py-2 emerald-gradient text-white text-sm font-semibold rounded-full shadow-lg mb-3 md:mb-4">好处二</div>
+          <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2 md:mb-3">海外流量"双入口"</h3>
+          <p class="text-base sm:text-lg font-semibold text-gradient">Accio Work × 国际站 = 1+1>2</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-6 sm:mb-10">
+          <div class="relative group">
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
+            <div class="relative bg-white rounded-2xl p-6 sm:p-8 shadow-[0_4px_20px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 group-hover:-translate-y-1">
+              <div>
+                <div class="flex items-baseline gap-2 mb-2">
+                  <span class="text-4xl sm:text-5xl font-bold text-gradient tracking-tight">1,000万+</span>
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                </div>
+                <p class="text-sm sm:text-base text-slate-600 leading-relaxed">Accio海外企业用户<br/>已占领 AI 采购入口</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-cyan-500/5 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
+            <div class="relative bg-white rounded-2xl p-6 sm:p-8 shadow-[0_4px_20px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 group-hover:-translate-y-1">
+              <div>
+                <div class="flex items-baseline gap-2 mb-2">
+                  <span class="text-4xl sm:text-5xl font-bold text-gradient tracking-tight">30分钟</span>
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                </div>
+                <p class="text-sm sm:text-base text-slate-600 leading-relaxed">老外30分钟即可开店<br/>催生大量海外需求</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div class="relative group">
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
+            <div class="relative bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-6 sm:p-8 border border-emerald-100 hover:border-emerald-200 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+              <div class="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl emerald-gradient flex items-center justify-center shadow-lg flex-shrink-0">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2">新增流量</h4>
+                  <div class="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100 rounded-full text-xs font-semibold text-emerald-700">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+                    持续增长
+                  </div>
+                </div>
+              </div>
+              <div class="space-y-2 sm:space-y-3 text-slate-700">
+                <div class="flex items-start gap-2 sm:gap-3">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <p class="text-xs sm:text-sm">Accio Work 直连国际站，更认可信息齐全的优质供给</p>
+                </div>
+                <div class="flex items-start gap-2 sm:gap-3">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <p class="text-xs sm:text-sm">优先向海外用户推荐国际站供应商，流量直接导入</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative group">
+            <div class="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-cyan-500/5 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
+            <div class="relative bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-6 sm:p-8 border border-teal-100 hover:border-teal-200 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+              <div class="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-lg flex-shrink-0">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2">运营提效</h4>
+                  <div class="inline-flex items-center gap-1 px-3 py-1 bg-teal-100 rounded-full text-xs font-semibold text-teal-700">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+                    正向飞轮
+                  </div>
+                </div>
+              </div>
+              <div class="space-y-2 sm:space-y-3 text-slate-700">
+                <div class="flex items-start gap-2 sm:gap-3">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <p class="text-xs sm:text-sm">自动调用国际站工具，以最简单方式运营好店铺</p>
+                </div>
+                <div class="flex items-start gap-2 sm:gap-3">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 text-teal-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <p class="text-xs sm:text-sm">运营越好 → 流量越多 → 效果越强，正向飞轮</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="h-px mx-auto max-w-md bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+
+<!-- ═══════════ 实战重现 ═══════════ -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-10 sm:py-12 md:py-24 bg-white">
+  <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-8 sm:mb-12 md:mb-20 text-slate-900 tracking-tight leading-tight px-4">
+    实战重现：跨境4大场景<br/>
+    <span class="text-gradient">只需1个指令</span>
+  </h2>
+
+  <div class="space-y-8 md:space-y-12">
+    <!-- 市场分析 -->
+    <div class="relative group">
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+      <div class="relative bg-gradient-to-br from-emerald-50/30 to-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group-hover:-translate-y-1">
+        <div class="flex items-center gap-3 mb-6 sm:mb-8">
+          <div class="w-10 h-10 rounded-xl emerald-gradient flex items-center justify-center shadow-lg">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">市场分析</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-10 items-start">
+          <div class="space-y-4 sm:space-y-6">
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-100">
+              <div class="text-xs font-bold text-slate-400 mb-2 sm:mb-3 uppercase tracking-widest">传统方式</div>
+              <p class="text-sm sm:text-base text-slate-600 leading-relaxed">每日人工手动搜集社媒、电商热度，录入 Excel，分析结果往往滞后 3-5 天</p>
+            </div>
+            <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100">
+              <div class="text-xs font-bold text-emerald-600 mb-2 sm:mb-3 uppercase tracking-widest">Accio Work 一个指令即得</div>
+              <p class="text-sm sm:text-base text-slate-900 leading-relaxed font-semibold">"我想在国际站切入 [宠物类目]，请帮我做一次深度市场透视"</p>
+            </div>
+          </div>
+          <div class="video-demo">
+            <video id="demoVideo1" controls muted preload="metadata" class="w-full h-auto">
+              <source src="https://cloud.video.taobao.com/vod/W5fYi-rqQYIlh-HHZELF0f5CRDKfv6fNWYQ2msuyK3I.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 选品策略 -->
+    <div class="relative group">
+      <div class="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-cyan-500/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+      <div class="relative bg-gradient-to-br from-slate-50 to-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group-hover:-translate-y-1">
+        <div class="flex items-center gap-3 mb-6 sm:mb-8">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-lg">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">选品策略</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-10 items-start">
+          <div class="space-y-4 sm:space-y-6">
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-100">
+              <div class="text-xs font-bold text-slate-400 mb-2 sm:mb-3 uppercase tracking-widest">传统方式</div>
+              <p class="text-sm sm:text-base text-slate-600 leading-relaxed">凭经验"盲目跟卖"或看大盘数据，难以挖掘用户真实痛点，试错成本极高</p>
+            </div>
+            <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 border border-teal-100">
+              <div class="text-xs font-bold text-teal-600 mb-2 sm:mb-3 uppercase tracking-widest">Accio Work 一个指令即得</div>
+              <p class="text-sm sm:text-base text-slate-900 leading-relaxed font-semibold">"我手里有一批雨伞，现在还没开国际站。请帮我评估下这生意的可行性"</p>
+            </div>
+          </div>
+          <div class="video-demo">
+            <video id="demoVideo2" controls muted preload="metadata" class="w-full h-auto">
+              <source src="https://cloud.video.taobao.com/vod/Nxb4aWRQCl1lwWRbMMBzD3viEThOhg4LRe9iSat78OI.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 店铺运营 -->
+    <div class="relative group">
+      <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-emerald-500/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+      <div class="relative bg-gradient-to-br from-teal-50/20 to-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group-hover:-translate-y-1">
+        <div class="flex items-center gap-3 mb-6 sm:mb-8">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center shadow-lg">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">店铺运营</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-10 items-start">
+          <div class="space-y-4 sm:space-y-6">
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-100">
+              <div class="text-xs font-bold text-slate-400 mb-2 sm:mb-3 uppercase tracking-widest">传统方式</div>
+              <p class="text-sm sm:text-base text-slate-600 leading-relaxed">多平台、多账号切换频繁。上架产品、检查订单、更新库存等重复性操作占据 80% 精力</p>
+            </div>
+            <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-cyan-50 to-emerald-50 border border-cyan-100">
+              <div class="text-xs font-bold text-cyan-600 mb-2 sm:mb-3 uppercase tracking-widest">Accio Work 一个指令即得</div>
+              <p class="text-sm sm:text-base text-slate-900 leading-relaxed font-semibold">"帮我把'选品上新'这件事自动化。我要解决每天找品累、自己拍图难、怕侵权盗图这几个点"</p>
+            </div>
+          </div>
+          <div class="video-demo">
+            <video id="demoVideo3" controls muted preload="metadata" class="w-full h-auto">
+              <source src="https://cloud.video.taobao.com/vod/YVOHY9avayT7kuXNayw_BWNN8LAo47kspjxU47_crQE.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 经营分析 -->
+    <div class="relative group">
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+      <div class="relative bg-gradient-to-br from-emerald-50/20 to-slate-50 rounded-3xl p-6 sm:p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group-hover:-translate-y-1">
+        <div class="flex items-center gap-3 mb-6 sm:mb-8">
+          <div class="w-10 h-10 rounded-xl emerald-gradient flex items-center justify-center shadow-lg">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">经营分析</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-10 items-start">
+          <div class="space-y-4 sm:space-y-6">
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-100">
+              <div class="text-xs font-bold text-slate-400 mb-2 sm:mb-3 uppercase tracking-widest">传统方式</div>
+              <p class="text-sm sm:text-base text-slate-600 leading-relaxed">周末需花费半天导出各平台报表，手工核对利润，报表格式混乱且易出错</p>
+            </div>
+            <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100">
+              <div class="text-xs font-bold text-emerald-600 mb-2 sm:mb-3 uppercase tracking-widest">Accio Work 一个指令即得</div>
+              <p class="text-sm sm:text-base text-slate-900 leading-relaxed font-semibold">"分析我店铺中各品类与竞争对手的差距，应该重点投入那个品类？"</p>
+            </div>
+          </div>
+          <div class="video-demo">
+            <video id="demoVideo4" controls muted preload="metadata" class="w-full h-auto">
+              <source src="https://cloud.video.taobao.com/vod/8NN260CyDXm0nRIfE4C8CwdhpgIRG0qlOs7jmuzrbw4.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="h-px mx-auto max-w-md bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="relative overflow-hidden py-10 sm:py-12 md:py-24 bg-slate-50">
+  <div class="absolute inset-0 bg-gradient-to-b from-emerald-50/50 to-white"></div>
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center">
+    <h2 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 sm:mb-8 md:mb-10 text-slate-900 tracking-tight leading-tight">开始使用 Accio Work</h2>
+    <p class="text-lg sm:text-xl md:text-2xl text-slate-600 mb-6 sm:mb-10 font-light">让 AI Agent 团队帮你做全球生意</p>
+
+    <div class="max-w-3xl mx-auto mb-10 sm:mb-16">
+      <div class="video-wrap">
+        <video id="installVideo" controls class="w-full h-auto">
+          <source src="https://tbexpand.alicdn.com/avpl/publish/copy/019d-528bb7fd-a1b22a10-9bc0bb0d-0d6c/294b742b97fd7ad6.mp4?auth_key=1775619120-0-0-06c5e258b78316a4be907f7a4eed65c9&biz=publish-fbf36462d9756bd5&t=213e035217756164209608131e0d72&t=213e035217756164209608131e0d72&b=publish&p=cloudvideo_http_video_extranet_notrans&i=559255162328" type="video/mp4" />
+          您的浏览器不支持视频播放
+        </video>
+      </div>
+    </div>
+
+    <a href="https://www.accio.com/work" target="_blank" rel="noopener noreferrer" class="inline-block px-10 sm:px-12 md:px-14 py-4 sm:py-5 md:py-6 emerald-gradient text-white text-lg sm:text-xl font-semibold rounded-full hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.16)] transform hover:scale-105 hover:-translate-y-1">
+      免费下载
+    </a>
+  </div>
+</section>
+
+<footer class="border-t border-slate-200 py-10 sm:py-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 text-center text-xs sm:text-sm text-slate-500">
+    © 2026 Accio Work. All rights reserved.
+  </div>
+</footer>
+
+</div>
+
+<!-- Video IntersectionObserver for autoplay -->
+<script>
+  function setupVideoAutoplay(videoEl) {
+    if (!videoEl) return;
+    // Start muted for autoplay compatibility
+    videoEl.muted = true;
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          videoEl.play().catch(function() {});
+        } else {
+          videoEl.pause();
+        }
+      });
+    }, { threshold: [0, 0.5, 1.0] });
+    observer.observe(videoEl);
+  }
+  setupVideoAutoplay(document.getElementById('heroVideo'));
+  setupVideoAutoplay(document.getElementById('installVideo'));
+  setupVideoAutoplay(document.getElementById('demoVideo1'));
+  setupVideoAutoplay(document.getElementById('demoVideo2'));
+  setupVideoAutoplay(document.getElementById('demoVideo3'));
+  setupVideoAutoplay(document.getElementById('demoVideo4'));
+</script>
+
+</body>
+</html>
